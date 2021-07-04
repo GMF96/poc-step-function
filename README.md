@@ -11,7 +11,7 @@ Simple POC to test locally the use of Step Function with two steps:
 * SQS
 
 ## How to execute?
-### Requisites
+### Requirements
 * Docker
 * 7Zip or similar
 * nodejs
@@ -25,7 +25,7 @@ Simple POC to test locally the use of Step Function with two steps:
         > docker-compose up -d
 
     - Create lambda for the workflow's first step:
-        > awslocal lambda create-function --function-name ConsultCEP --runtime nodejs12.x --handler step-one-lambda.handler --role arn:aws:iam::0000000000001:role/DummyRole --zip-file fileb://step-one-lambda.zip
+        > awslocal lambda create-function --function-name ConsultCEP --runtime nodejs12.x --handler step-one-lambda.handler --role arn:aws:iam::0000000000001:role/DummyRole --zip-file fileb://src/handler/step-one-lambda.zip
 
     - Create SNS topic:
         > awslocal sns create-topic --name viacep_topic
@@ -47,7 +47,7 @@ Simple POC to test locally the use of Step Function with two steps:
     - Describe execution:
         > awslocal stepfunctions describe-execution --execution-arn arn:aws:states:us-east-1:000000000000:execution:ViaCEPWorkflow:test
 
-    To check if the message was sent to SNS and then to SQS, use this command (once per message):
+    - To check if the message was sent to SNS and then to SQS, use this command (once per message):
         > awslocal sqs receive-message --queue-url http://localhost:4566/000000000000/viacep_queue
 
 
