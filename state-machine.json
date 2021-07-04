@@ -1,0 +1,21 @@
+{
+  "Comment": "State Machine to test step functions with a simple http request to viacep.",
+  "StartAt": "ConsultCEP",
+  "States": {
+    "ConsultCEP": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:000000000000:function:ConsultCEP",
+      "ResultPath": "$.result",
+      "Next": "SendSNS"
+    },
+    "SendSNS": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sns:publish",
+      "Parameters": {
+        "TopicArn": "arn:aws:sns:us-east-1:000000000000:viacep_topic",
+        "Message.$": "$.result.body"
+      },
+      "End": true
+    }
+  }
+}
