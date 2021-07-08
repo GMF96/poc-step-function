@@ -2,7 +2,7 @@
 ## Description
 Simple POC to test locally the use of Step Function with two steps:
 * Lambda function that makes a call to viacep API passing CEP and returns the complete information about that CEP
-* Publish a message with the CEP informations to a SNS topic
+* Publish a message with the CEP information to a SNS topic
 
 ## Services used
 * Step Function
